@@ -7,13 +7,13 @@ import { useForm } from "../../hooks/useForm";
 import { signUpApi } from "../../services/authApi";
 export const SignUpPage = () => {
   const initialState = {};
-  const { form, setForm, handleOnChange } = useForm(initialState);
+  const { form, setForm, handleOnChange, passwordErrors } =
+    useForm(initialState);
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const { confirmPassword, ...rest } = form;
     if (confirmPassword !== rest.password) return alert("Password Don't match");
     const result = await signUpApi(form);
-    console.log(result);
   };
   return (
     <div className="d-flex justify-content-center">
@@ -26,7 +26,17 @@ export const SignUpPage = () => {
         {signUpInputs.map((input) => (
           <CustomInput onChange={handleOnChange} key={input.name} {...input} />
         ))}
-        <Button variant="primary" type="submit">
+        <div className="py-1">
+          <ul className="text-danger">
+            {passwordErrors.length > 0 &&
+              passwordErrors.map((error) => <li key={error}>{error}</li>)}
+          </ul>
+        </div>
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={passwordErrors.length}
+        >
           Submit
         </Button>
       </Form>

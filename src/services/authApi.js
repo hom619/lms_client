@@ -7,7 +7,8 @@ export const signUpApi = async (payload) => {
     url: apiEndPoint + "/register",
     method: "post",
     payload,
+    showToast: true,
   };
   const result = await apiProcessor(obj);
-  console.log(result);
+  return result;
 };
