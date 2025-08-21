@@ -5,6 +5,7 @@ import {
   DashboardPage,
   SignInPage,
   SignUpPage,
+  VerifyUser,
   ForgotPasswordPage,
   DefaultLayout,
   UserLayout,
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
         <Route path="signup" element={<SignUpPage />} />
+        <Route path="activate-user" element={<VerifyUser />} />
         <Route path="signin" element={<SignInPage />} />
       </Route>
 

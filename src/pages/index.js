@@ -7,3 +7,4 @@ export { DefaultLayout } from "@components/layouts/DefaultLayout";
 export { UserLayout } from "@components/layouts/UserLayout";
 export { Books } from "./books/Books";
 export { UsersPage } from "./users/UsersPage";
+export { VerifyUser } from "./auth/VerifyUser";
