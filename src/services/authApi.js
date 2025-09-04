@@ -20,3 +20,13 @@ export const activateUserApi = async (payload) => {
   };
   return apiProcessor(obj);
 };
+
+export const signInUserApi = async (payload) => {
+  const obj = {
+    url: apiEndPoint + "/login",
+    method: "post",
+    payload,
+    showToast: true,
+  };
+  return apiProcessor(obj);
+};
