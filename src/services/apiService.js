@@ -1,12 +1,26 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const apiProcessor = async ({ url, method, payload, showToast }) => {
+const getAccessJWT = () => {
+  return sessionStorage.getItem("accessJWT");
+};
+export const apiProcessor = async ({
+  url,
+  method,
+  payload,
+  showToast,
+  isPrivateCall,
+}) => {
   try {
+    const headers = {};
+    if (isPrivateCall) {
+      headers.authorization = `Bearer ${getAccessJWT()}`;
+    }
     const pendingToastId = "auth-pending";
     const pendingResponse = axios({
       url,
       method,
       data: payload,
+      headers,
     });
 
     if (showToast && !toast.isActive(pendingToastId)) {

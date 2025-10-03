@@ -2,8 +2,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { IoLogOutOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { useSelector } from "react-redux";
 export const Header = () => {
+  const { user } = useSelector((state) => state.userInfo);
   return (
     <Navbar expand="md" className="bg-dark" variant="dark">
       <Container>
@@ -14,12 +18,27 @@ export const Header = () => {
             <Link className="nav-link" to="/">
               Home
             </Link>
-            <Link className="nav-link" to="/signup">
-              Sign Up
-            </Link>
-            <Link className="nav-link" to="/signin">
-              Sign In
-            </Link>
+            {user?._id ? (
+              <>
+                <Link className="nav-link" to="/user">
+                  <AiOutlineDashboard />
+                  Dashboard
+                </Link>
+                <Link className="nav-link" to="/">
+                  <IoLogOutOutline />
+                  LogOut
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link className="nav-link" to="/signup">
+                  Sign Up
+                </Link>
+                <Link className="nav-link" to="/signin">
+                  Sign In
+                </Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
