@@ -3,17 +3,22 @@ import { toast } from "react-toastify";
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
 };
+const getRefreshJWT = () => {
+  return localStorage.getItem("refreshJWT");
+};
 export const apiProcessor = async ({
   url,
   method,
   payload,
   showToast,
   isPrivateCall,
+  isRefreshJWT,
 }) => {
   try {
     const headers = {};
     if (isPrivateCall) {
-      headers.authorization = `Bearer ${getAccessJWT()}`;
+      const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
+      headers.authorization = `Bearer ${token}`;
     }
     const pendingToastId = "auth-pending";
     const pendingResponse = axios({

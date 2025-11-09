@@ -30,3 +30,13 @@ export const signInUserApi = async (payload) => {
   };
   return apiProcessor(obj);
 };
+//Request AccessJWT api
+export const fetchNewAccessJWTApi = async () => {
+  const obj = {
+    url: apiEndPoint + "/renew-jwt",
+    method: "get",
+    isPrivateCall: true,
+    isRefreshJWT: true,
+  };
+  return apiProcessor(obj);
+};
