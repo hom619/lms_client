@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { fetchNewAccessJWTApi } from "./authApi";
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
 };
@@ -49,6 +50,26 @@ export const apiProcessor = async ({
     const msg = error?.response?.data?.message || error.message;
     if (!toast.isActive(`error-${msg}`) && showToast) {
       toast.error(msg, { toastId: `error-${msg}` });
+    }
+    if (error.status === 401 && msg === "jwt expired") {
+      //call api to get new accessJWT
+      const { payload } = await fetchNewAccessJWTApi();
+      console.log(payload);
+      if (payload) {
+        sessionStorage.setItem("accessJWT", payload);
+        //call the apiProcessor()
+        return apiProcessor({
+          url,
+          method,
+          payload,
+          showToast,
+          isPrivateCall,
+          isRefreshJWT,
+        });
+      }
+    } else {
+      sessionStorage.removeItem("accessJWT");
+      localStorage.removeItem("refreshJWT");
     }
     return {
       status: "error",
