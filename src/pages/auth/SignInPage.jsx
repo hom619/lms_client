@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,12 +14,23 @@ export const SignInPage = () => {
     email: "",
     password: "",
   };
+  const showLoaderRef = useRef(true);
   const { form, handleOnChange } = useForm(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userInfo);
   useEffect(() => {
     user?._id ? navigate("/user") : dispatch(autoLogin());
+    if (
+      sessionStorage.getItem("accessJWT") ||
+      localStorage.getItem("refreshJWT")
+    ) {
+      setTimeout(() => {
+        showLoaderRef.current = false;
+      }, 2000);
+    } else {
+      showLoaderRef.current = false;
+    }
   }, [user?._id, navigate, dispatch]);
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +46,14 @@ export const SignInPage = () => {
       alert("Please fill all the fields");
     }
   };
+  if (showLoaderRef.current) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+
   return (
     <div className="sign-in-page d-flex justify-content-center align-items-center">
       <Card style={{ width: "18rem" }}>

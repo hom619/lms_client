@@ -6,8 +6,20 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { logOutApi } from "../../services/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../features/userSlice";
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+  const handleOnLogOut = () => {
+    //call api to logout from backend
+    logOutApi();
+    //logout from front end
+    sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("refreshJWT");
+    dispatch(setUser({}));
+  };
   return (
     <Navbar expand="md" className="bg-dark" variant="dark">
       <Container>
@@ -24,7 +36,7 @@ export const Header = () => {
                   <AiOutlineDashboard />
                   Dashboard
                 </Link>
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/" onClick={handleOnLogOut}>
                   <IoLogOutOutline />
                   LogOut
                 </Link>
