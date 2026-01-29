@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { activateUserApi } from "../../services/authApi";
+import { activateUserApi } from "@services/authApi";
 import { Alert } from "react-bootstrap";
 
 export const VerifyUser = () => {

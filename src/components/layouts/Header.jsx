@@ -6,9 +6,9 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import { logOutApi } from "../../services/authApi";
+import { logOutApi } from "@services/authApi";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../features/userSlice";
+import { setUser } from "@features/userSlice";
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();

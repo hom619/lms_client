@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   HomePage,
@@ -22,6 +21,7 @@ export const AppRoutes = () => {
         <Route path="signup" element={<SignUpPage />} />
         <Route path="activate-user" element={<VerifyUser />} />
         <Route path="signin" element={<SignInPage />} />
+        <Route path="forgot-password" element={<ForgotPasswordPage />} />
       </Route>
 
       {/* Private pages */}

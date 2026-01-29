@@ -48,3 +48,11 @@ export const logOutApi = async () => {
   };
   return apiProcessor(obj);
 };
+export const requestOTPApi = async (payload) => {
+  const obj = {
+    url: apiEndPoint + "/otp",
+    method: "post",
+    payload,
+  };
+  return apiProcessor(obj);
+};
