@@ -56,3 +56,13 @@ export const requestOTPApi = async (payload) => {
   };
   return apiProcessor(obj);
 };
+
+export const resetPasswordApi = async (payload) => {
+  const obj = {
+    url: apiEndPoint + "/reset-password",
+    method: "post",
+    payload,
+    showToast: true,
+  };
+  return apiProcessor(obj);
+};

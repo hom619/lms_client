@@ -6,8 +6,10 @@ import Spinner from "react-bootstrap/Spinner";
 import { useEffect, useRef, useState } from "react";
 import { CustomInput } from "@components/customInputs/CustomInput";
 import { useForm } from "../../hooks/useForm";
-import { requestOTPApi } from "../../services/authApi";
+import { requestOTPApi, resetPasswordApi } from "../../services/authApi";
+import { useNavigate } from "react-router-dom";
 export const ForgotPasswordPage = () => {
+  const navigate = useNavigate();
   const initialState = {};
   const { form, setForm, passwordErrors, handleOnChange } =
     useForm(initialState);
@@ -37,9 +39,18 @@ export const ForgotPasswordPage = () => {
     setShowPasswordRestForm(true);
     // Add your logic to handle OTP request here
   };
-  const handleOnPasswordResetSubmit = (e) => {
+  const handleOnPasswordResetSubmit = async (e) => {
     e.preventDefault();
-    console.log(form.otp, form.password, form.confirmPassword);
+    const email = emailRef.current.value;
+    const payload = {
+      email,
+      password: form.password,
+      otp: form.otp,
+    };
+    const response = await resetPasswordApi(payload);
+    if (response?.status === "success") {
+      setTimeout(() => navigate("/signin"), 3000);
+    }
   };
 
   return (
