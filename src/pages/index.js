@@ -3,8 +3,6 @@ export { DashboardPage } from "./dashboard/DashboardPage";
 export { SignUpPage } from "./auth/SignUpPage";
 export { SignInPage } from "./auth/SignInPage";
 export { ForgotPasswordPage } from "./auth/ForgotPasswordPage";
-export { DefaultLayout } from "@components/layouts/DefaultLayout";
-export { UserLayout } from "@components/layouts/UserLayout";
 export { Books } from "./books/Books";
 export { UsersPage } from "./users/UsersPage";
 export { VerifyUser } from "./auth/VerifyUser";

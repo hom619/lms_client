@@ -6,12 +6,12 @@ import {
   SignUpPage,
   VerifyUser,
   ForgotPasswordPage,
-  DefaultLayout,
-  UserLayout,
   Books,
   UsersPage,
 } from "../pages";
-
+import { DefaultLayout } from "@components/layouts/DefaultLayout";
+import { UserLayout } from "@components/layouts/UserLayout";
+import { NewBookPage } from "@pages/books/NewBookPage";
 export const AppRoutes = () => {
   return (
     <Routes>
@@ -28,6 +28,7 @@ export const AppRoutes = () => {
       <Route path="/user" element={<UserLayout />}>
         <Route index element={<DashboardPage />}></Route>
         <Route path="books" element={<Books />}></Route>
+        <Route path="new-book" element={<NewBookPage />}></Route>
         <Route path="users-list" element={<UsersPage />}></Route>
       </Route>
     </Routes>
