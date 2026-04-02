@@ -1,6 +1,10 @@
 .main {
   min-height: 80vh;
 }
+.user-main {
+  min-height: 80vh;
+  width: calc(100% - 200px);
+}
 
 /* Sign in page */
 .sign-in-page {

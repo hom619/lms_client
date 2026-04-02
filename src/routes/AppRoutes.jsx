@@ -12,6 +12,7 @@ import {
 import { DefaultLayout } from "@components/layouts/DefaultLayout";
 import { UserLayout } from "@components/layouts/UserLayout";
 import { NewBookPage } from "@pages/books/NewBookPage";
+import { EditBookPage } from "@pages/books/EditBookPage";
 export const AppRoutes = () => {
   return (
     <Routes>
@@ -29,6 +30,7 @@ export const AppRoutes = () => {
         <Route index element={<DashboardPage />}></Route>
         <Route path="books" element={<Books />}></Route>
         <Route path="new-book" element={<NewBookPage />}></Route>
+        <Route path="edit-book" element={<EditBookPage />}></Route>
         <Route path="users-list" element={<UsersPage />}></Route>
       </Route>
     </Routes>

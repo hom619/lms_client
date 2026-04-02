@@ -4,13 +4,14 @@ import Form from "react-bootstrap/Form";
 import { newBookInputs } from "@assets/customInputs/bookInputs";
 import { Button } from "react-bootstrap";
 import { useForm } from "@hooks/useForm";
+import { postNewBookAction } from "@features/book/bookAction";
 
 export const NewBookForm = () => {
   const initialState = {};
   const { form, setForm, handleOnChange } = useForm(initialState);
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    postNewBookAction(form);
   };
   return (
     <div className="p-4">

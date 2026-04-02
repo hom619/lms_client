@@ -1,7 +1,7 @@
 //call api processor to fetch the user
 import { apiProcessor } from "../services/apiService";
 
-const apiBaseURL = "http://localhost:8000";
+const apiBaseURL = import.meta.env.VITE_BASE_API_URL;
 const userApiEndPoint = apiBaseURL + "/api/v1/users";
 export const fetchUserApi = async () => {
   const obj = {

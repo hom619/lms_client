@@ -20,6 +20,9 @@ export const apiProcessor = async ({
     if (isPrivateCall) {
       const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
       headers.authorization = `Bearer ${token}`;
+      if (!token) {
+        return alert("Please sign in again");
+      }
     }
     const pendingToastId = "auth-pending";
     const pendingResponse = axios({
@@ -37,7 +40,7 @@ export const apiProcessor = async ({
         },
         {
           toastId: pendingToastId,
-        }
+        },
       );
     }
     const { data } = await pendingResponse;
@@ -51,25 +54,26 @@ export const apiProcessor = async ({
     if (!toast.isActive(`error-${msg}`) && showToast) {
       toast.error(msg, { toastId: `error-${msg}` });
     }
-    if (error.status === 401 && msg === "jwt expired") {
-      //call api to get new accessJWT
-      const { payload } = await fetchNewAccessJWTApi();
-      console.log(payload);
-      if (payload) {
-        sessionStorage.setItem("accessJWT", payload);
-        //call the apiProcessor()
-        return apiProcessor({
-          url,
-          method,
-          payload,
-          showToast,
-          isPrivateCall,
-          isRefreshJWT,
-        });
+    if (error.status === 401) {
+      if (msg === "jwt expired") {
+        //call api to get new accessJWT
+        const { payload } = await fetchNewAccessJWTApi();
+        if (payload) {
+          sessionStorage.setItem("accessJWT", payload);
+          //call the apiProcessor()
+          return apiProcessor({
+            url,
+            method,
+            payload,
+            showToast,
+            isPrivateCall,
+            isRefreshJWT,
+          });
+        }
+      } else {
+        sessionStorage.removeItem("accessJWT");
+        localStorage.removeItem("refreshJWT");
       }
-    } else {
-      sessionStorage.removeItem("accessJWT");
-      localStorage.removeItem("refreshJWT");
     }
     return {
       status: "error",
