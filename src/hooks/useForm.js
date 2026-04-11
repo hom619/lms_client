@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { errorValidator } from "../utils/validatePassword";
 const handleOnChange = ({ e, form, setForm }) => {
-  const { name, value } = e.target;
+  let { checked, name, value } = e.target;
+  if (name === "status") {
+    value = checked ? "Active" : "Inactive";
+  }
   setForm({
     ...form,
     [name]: value,

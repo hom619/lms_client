@@ -30,7 +30,7 @@ export const AppRoutes = () => {
         <Route index element={<DashboardPage />}></Route>
         <Route path="books" element={<Books />}></Route>
         <Route path="new-book" element={<NewBookPage />}></Route>
-        <Route path="edit-book" element={<EditBookPage />}></Route>
+        <Route path="edit-book/:_id" element={<EditBookPage />}></Route>
         <Route path="users-list" element={<UsersPage />}></Route>
       </Route>
     </Routes>
