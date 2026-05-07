@@ -24,12 +24,12 @@ export const newBookInputs = [
     required: true,
     placeholder: "Stephen Hawking",
   },
-  {
-    label: "Image Url",
-    name: "imgUrl",
-    type: "url",
-    placeholder: "http://localhost:5173/user/new-book",
-  },
+  // {
+  //   label: "Image Url",
+  //   name: "imgUrl",
+  //   type: "url",
+  //   placeholder: "http://localhost:5173/user/new-book",
+  // },
   {
     label: "ISBN",
     name: "isbn",
@@ -86,12 +86,12 @@ export const editBookInputs = [
     required: true,
     placeholder: "Stephen Hawking",
   },
-  {
-    label: "Image Url",
-    name: "imgUrl",
-    type: "url",
-    placeholder: "http://localhost:5173/user/new-book",
-  },
+  // {
+  //   label: "Image Url",
+  //   name: "imgUrl",
+  //   type: "url",
+  //   placeholder: "http://localhost:5173/user/new-book",
+  // },
   {
     label: "ISBN",
     name: "isbn",
@@ -110,7 +110,6 @@ export const editBookInputs = [
     label: "Availabe Date",
     name: "expectedAvailable",
     type: "date",
-    required: true,
   },
   {
     label: "Description",

@@ -61,7 +61,11 @@ export const BooksTable = () => {
                   {status}
                 </td>
                 <td>
-                  <img src={imgUrl} alt="" width="60px" />
+                  <img
+                    src={import.meta.env.VITE_BASE_API_URL + imgUrl.slice(6)}
+                    alt=""
+                    width="60px"
+                  />
                 </td>
                 <td>{title}</td>
                 <td>
