@@ -9,6 +9,10 @@ import { useSelector } from "react-redux";
 import { logOutApi } from "@services/authApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "@features/userSlice";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import { FaSearch } from "react-icons/fa";
+
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
@@ -26,32 +30,49 @@ export const Header = () => {
         <Navbar.Brand href="#home">L.M.S</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-            {user?._id ? (
-              <>
-                <Link className="nav-link" to="/user">
-                  <AiOutlineDashboard />
-                  Dashboard
-                </Link>
-                <Link className="nav-link" to="/" onClick={handleOnLogOut}>
-                  <IoLogOutOutline />
-                  LogOut
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className="nav-link" to="/signup">
-                  Sign Up
-                </Link>
-                <Link className="nav-link" to="/signin">
-                  Sign In
-                </Link>
-              </>
-            )}
-          </Nav>
+          <div className="w-100 d-flex justify-content-between flex-column flex-md-row">
+            <div></div>
+            <Form style={{ width: "40%" }}>
+              {" "}
+              <InputGroup>
+                <Form.Control
+                  placeholder="Search Book"
+                  aria-label="Search Book"
+                  aria-describedby="basic-addon2"
+                />
+                <InputGroup.Text id="basic-addon2">
+                  <FaSearch />
+                </InputGroup.Text>
+              </InputGroup>
+            </Form>
+
+            <Nav>
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+              {user?._id ? (
+                <>
+                  <Link className="nav-link" to="/user">
+                    <AiOutlineDashboard />
+                    Dashboard
+                  </Link>
+                  <Link className="nav-link" to="/" onClick={handleOnLogOut}>
+                    <IoLogOutOutline />
+                    LogOut
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link className="nav-link" to="/signup">
+                    Sign Up
+                  </Link>
+                  <Link className="nav-link" to="/signin">
+                    Sign In
+                  </Link>
+                </>
+              )}
+            </Nav>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

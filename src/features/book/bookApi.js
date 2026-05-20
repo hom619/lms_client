@@ -14,6 +14,14 @@ export const postNewBookApi = async (payload) => {
   const result = await apiProcessor(obj);
   return result;
 };
+export const getAllPublicBooksApi = async () => {
+  const obj = {
+    url: bookApiEndPoint,
+    method: "get",
+  };
+  const result = await apiProcessor(obj);
+  return result;
+};
 export const getAllBooksAdminApi = async () => {
   const obj = {
     url: bookApiEndPoint + "/admin",
@@ -23,6 +31,16 @@ export const getAllBooksAdminApi = async () => {
   const result = await apiProcessor(obj);
   return result;
 };
+
+export const getSingleBookApi = async (slug) => {
+  const obj = {
+    url: bookApiEndPoint + "/public/" + slug,
+    method: "get",
+  };
+  const result = await apiProcessor(obj);
+  return result;
+};
+
 export const updateBookApi = async (payload) => {
   const obj = {
     url: bookApiEndPoint,

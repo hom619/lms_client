@@ -13,12 +13,14 @@ import { DefaultLayout } from "@components/layouts/DefaultLayout";
 import { UserLayout } from "@components/layouts/UserLayout";
 import { NewBookPage } from "@pages/books/NewBookPage";
 import { EditBookPage } from "@pages/books/EditBookPage";
+import { BookLandingPage } from "@pages/books/BookLandingPage";
 export const AppRoutes = () => {
   return (
     <Routes>
       {/* public pages */}
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="books/:slug" element={<BookLandingPage />} />
         <Route path="signup" element={<SignUpPage />} />
         <Route path="activate-user" element={<VerifyUser />} />
         <Route path="signin" element={<SignInPage />} />
