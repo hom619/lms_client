@@ -11,7 +11,7 @@ import Tabs from "react-bootstrap/Tabs";
 import { Reviews } from "@pages/reviews/Reviews";
 export const BookLandingPage = () => {
   const { slug } = useParams();
-  const { selectedBook } = useSelector((state) => state.bookInfo);
+  const { selectedBook } = useSelector((state) => state.bookInfo || []);
   const dispatch = useDispatch();
   useEffect(() => {
     //const selectedBook = publicBooks.find((book) => book.slug === slug);
@@ -27,7 +27,7 @@ export const BookLandingPage = () => {
             <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
               Home
             </Breadcrumb.Item>
-            <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
+            <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/all-books" }}>
               All Books
             </Breadcrumb.Item>
             <Breadcrumb.Item active>{selectedBook.title}</Breadcrumb.Item>
