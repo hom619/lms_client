@@ -16,8 +16,6 @@ export const BookListing = ({ bookList }) => {
   const pages = Math.ceil(bookList.length / booksPerScreen);
   const [searchParams, setSearchParams] = useSearchParams();
   const s = searchParams.get("s");
-  console.log(s);
-  const filteredBooks = s ? "TODO" : bookList;
   return (
     <Row>
       <Col>

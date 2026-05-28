@@ -12,13 +12,14 @@ export const Star = ({ avgRating, totalReviews }) => {
   }
   //full stars
   for (let i = 0; i < fullStar; i++) {
-    showStars.push(<FaStar className="text-warning" />);
+    showStars.push(<FaStar key={`full_${i}`} className="text-warning" />);
   }
   //half stars
-  if (halfStar) showStars.push(<FaStarHalfAlt className="text-warning" />);
+  if (halfStar)
+    showStars.push(<FaStarHalfAlt key="half" className="text-warning" />);
   //empty stars
   for (let i = 0; i < emptyStar; i++) {
-    showStars.push(<FaStar className="text-secondary" />);
+    showStars.push(<FaStar key={`empty_${i}`} className="text-secondary" />);
   }
   return (
     <div>

@@ -9,9 +9,11 @@ import { Star } from "@components/star/Star";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { Reviews } from "@pages/reviews/Reviews";
+import { setCart } from "@features/cart/cartSlice";
 export const BookLandingPage = () => {
   const { slug } = useParams();
-  const { selectedBook } = useSelector((state) => state.bookInfo || []);
+  const { selectedBook } = useSelector((state) => state.bookInfo);
+  const { cart } = useSelector((state) => state.cartInfo || []);
   const dispatch = useDispatch();
   useEffect(() => {
     //const selectedBook = publicBooks.find((book) => book.slug === slug);
@@ -19,6 +21,11 @@ export const BookLandingPage = () => {
     dispatch(getSingleBookAction(slug));
   }, [slug, dispatch]);
   const [pathIndex, setPathIndex] = useState(0);
+
+  const handleOnCart = () => {
+    dispatch(setCart(selectedBook));
+  };
+  const isDisabled = cart?.find((book) => book._id === selectedBook._id);
   return (
     <Container>
       <Row className="my-3">
@@ -91,7 +98,15 @@ export const BookLandingPage = () => {
               <div className="bottom">
                 <hr />
                 <div className="d-grid">
-                  <Button variant="dark">Add to Borrowing List</Button>
+                  <Button
+                    variant="dark"
+                    onClick={handleOnCart}
+                    disabled={isDisabled}
+                  >
+                    {isDisabled
+                      ? "This book is already in the cart"
+                      : "Add to Borrowing List"}
+                  </Button>
                 </div>
               </div>
             </div>

@@ -1,7 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
@@ -14,9 +13,10 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { FaSearch } from "react-icons/fa";
 import { useRef } from "react";
 import { GiBookshelf } from "react-icons/gi";
-
+import { BsCart3 } from "react-icons/bs";
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
+  const { cart } = useSelector((state) => state.cartInfo);
   const dispatch = useDispatch();
   const searchRef = useRef();
   const handleOnLogOut = () => {
@@ -85,6 +85,14 @@ export const Header = () => {
                   </Link>
                 </>
               )}
+              <Link className="nav-link position-relative" to="/cart">
+                {cart?.length > 0 && (
+                  <div className="cart-count position-absolute">
+                    {cart?.length}
+                  </div>
+                )}
+                <BsCart3 className="fs-4" />
+              </Link>
             </Nav>
           </div>
         </Navbar.Collapse>
