@@ -1,15 +1,39 @@
-import { removeBookFromCart } from "@features/cart/cartSlice";
+import { postBorrowAction } from "@features/cart/cartAction";
+import {
+  clearCart,
+  removeBookFromCart,
+  setRecentBorrow,
+} from "@features/cart/cartSlice";
 import React from "react";
 import { Alert, Button, Col, Container, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const CartPage = () => {
   const { cart } = useSelector((state) => state.cartInfo || []);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleOnBookRemove = (_id) => {
     dispatch(removeBookFromCart(_id));
+  };
+  const handleOnBurrow = async () => {
+    if (confirm("Are you sure you want to borrow these books?")) {
+      const booksArg = cart.map(({ _id, title, imgUrl }) => {
+        return {
+          bookId: _id,
+          bookTitle: title,
+          thumbnail: imgUrl,
+        };
+      });
+      const { payload } = await postBorrowAction(booksArg);
+      // //1. Store the payload coming from server
+      dispatch(setRecentBorrow(payload));
+      // //2. Clear cart state
+      dispatch(clearCart());
+      // //3. send user to thank you page
+      navigate("/user/thank-you");
+    }
   };
   return (
     <Container>
@@ -48,7 +72,9 @@ export const CartPage = () => {
             {cart?.length > 0 ? (
               <div className="text-end">
                 {user?._id ? (
-                  <Button variant="secondary">Proceed to checkout</Button>
+                  <Button variant="secondary" onClick={handleOnBurrow}>
+                    Proceed to checkout
+                  </Button>
                 ) : (
                   <Link to="/signin" state={{ from: "/cart" }}>
                     <Button variant="secondary">Login To Borrow</Button>
