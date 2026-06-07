@@ -76,14 +76,25 @@ export const BooksTable = () => {
                       : "N/A"}
                 </td>
                 <td>
-                  <Link to={"/user/edit-book/" + _id}>
-                    <Button variant="warning" className="m-2">
-                      Edit
-                    </Button>
-                  </Link>
-                  <Button variant="danger" onClick={() => handleOnDelete(_id)}>
-                    Delete
-                  </Button>
+                  <div className="d-flex justify-content-center align-items-center">
+                    {" "}
+                    <div>
+                      <Link to={"/user/edit-book/" + _id}>
+                        <Button variant="warning" className="m-2">
+                          Edit
+                        </Button>
+                      </Link>
+                    </div>
+                    <div>
+                      {" "}
+                      <Button
+                        variant="danger"
+                        onClick={() => handleOnDelete(_id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ),
