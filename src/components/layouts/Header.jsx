@@ -14,6 +14,7 @@ import { FaSearch } from "react-icons/fa";
 import { useRef } from "react";
 import { GiBookshelf } from "react-icons/gi";
 import { BsCart3 } from "react-icons/bs";
+import { setAllBorrows, setMyBorrows } from "@features/borrow/borrowSlice";
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const { cart } = useSelector((state) => state.cartInfo);
@@ -26,6 +27,8 @@ export const Header = () => {
     sessionStorage.removeItem("accessJWT");
     localStorage.removeItem("refreshJWT");
     dispatch(setUser({}));
+    dispatch(setMyBorrows([]));
+    dispatch(setAllBorrows([]));
   };
   const navigate = useNavigate();
   const handleOnSearch = (e) => {
