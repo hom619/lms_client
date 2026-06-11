@@ -19,10 +19,11 @@ export const CartPage = () => {
   };
   const handleOnBurrow = async () => {
     if (confirm("Are you sure you want to borrow these books?")) {
-      const booksArg = cart.map(({ _id, title, imgUrl }) => {
+      const booksArg = cart.map(({ _id, title, imgUrl, slug }) => {
         return {
           bookId: _id,
           bookTitle: title,
+          bookSlug: slug,
           thumbnail: imgUrl,
         };
       });
