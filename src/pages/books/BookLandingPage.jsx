@@ -25,7 +25,7 @@ export const BookLandingPage = () => {
   const handleOnCart = () => {
     dispatch(setCart(selectedBook));
   };
-  const isDisabled = cart?.find((book) => book._id === selectedBook._id);
+  const isBookIntheCart = cart?.find((book) => book._id === selectedBook._id);
   return (
     <Container>
       <Row className="my-3">
@@ -101,11 +101,13 @@ export const BookLandingPage = () => {
                   <Button
                     variant="dark"
                     onClick={handleOnCart}
-                    disabled={isDisabled}
+                    disabled={isBookIntheCart || selectedBook.expectedAvailable}
                   >
-                    {isDisabled
-                      ? "This book is already in the cart"
-                      : "Add to Borrowing List"}
+                    {selectedBook.expectedAvailable
+                      ? `Available from ${selectedBook.expectedAvailable.slice(0, 10)} `
+                      : isBookIntheCart
+                        ? "This book is already in the cart"
+                        : "Add to borrowing List"}
                   </Button>
                 </div>
               </div>
